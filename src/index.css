@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-zen-bg: #FDFCFB;
+  --color-zen-sage: #9EB3A0;
+  --color-zen-sand: #F2E9E1;
+  --color-zen-slate: #4A5568;
+  --color-zen-rose: #E5B39B;
+  --color-zen-clay: #D17A7A;
+  
+  --color-macro-educational: var(--color-zen-sage);
+  --color-macro-entertainment: var(--color-zen-rose);
+  --color-macro-stress: var(--color-zen-clay);
+  --color-macro-brainrot: var(--color-zen-slate);
+}
+
+:root {
+  background-color: var(--color-zen-bg);
+  color: var(--color-zen-slate);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
