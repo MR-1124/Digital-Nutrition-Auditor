@@ -38,7 +38,7 @@ export const LogForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl shadow-sm border border-zen-sand space-y-4">
+    <form onSubmit={handleSubmit} className="bg-zen-surface p-6 rounded-2xl shadow-sm border border-zen-sand space-y-4 transition-colors">
       <h2 className="text-xl font-medium text-zen-slate mb-4">Log Activity</h2>
       
       <div className="space-y-2">
@@ -49,7 +49,7 @@ export const LogForm: React.FC = () => {
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Reading documentation, Twitter, Netflix"
           maxLength={50}
-          className="w-full px-4 py-2 rounded-xl border border-zen-sand focus:outline-none focus:ring-2 focus:ring-zen-sage/30 bg-zen-bg/30"
+          className="w-full px-4 py-2 rounded-xl border border-zen-sand focus:outline-none focus:ring-2 focus:ring-zen-sage/30 bg-zen-bg/30 text-zen-slate"
         />
       </div>
 
@@ -60,7 +60,7 @@ export const LogForm: React.FC = () => {
             type="number"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full px-4 py-2 rounded-xl border border-zen-sand focus:outline-none focus:ring-2 focus:ring-zen-sage/30 bg-zen-bg/30"
+            className="w-full px-4 py-2 rounded-xl border border-zen-sand focus:outline-none focus:ring-2 focus:ring-zen-sage/30 bg-zen-bg/30 text-zen-slate"
           />
         </div>
       </div>
@@ -75,8 +75,8 @@ export const LogForm: React.FC = () => {
               onClick={() => setMacro(m.value)}
               className={`px-3 py-2 rounded-xl text-xs font-medium transition-all border ${
                 macro === m.value
-                  ? `${m.color} text-white border-transparent shadow-sm`
-                  : 'bg-white text-zen-slate/60 border-zen-sand hover:border-zen-sage'
+                  ? `${m.color} text-zen-bg border-transparent shadow-sm`
+                  : 'bg-zen-surface text-zen-slate/60 border-zen-sand hover:border-zen-sage'
               }`}
             >
               {m.label}
@@ -95,7 +95,7 @@ export const LogForm: React.FC = () => {
               onClick={() => setMood(m.value)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
                 mood === m.value
-                  ? 'bg-zen-slate text-white border-transparent'
+                  ? 'bg-zen-slate text-zen-bg border-transparent'
                   : 'bg-zen-sand/20 text-zen-slate/60 border-transparent hover:bg-zen-sand/40'
               }`}
             >
@@ -108,7 +108,7 @@ export const LogForm: React.FC = () => {
 
       <button
         type="submit"
-        className="w-full flex items-center justify-center gap-2 bg-zen-slate text-white py-3 rounded-xl font-medium hover:bg-zen-slate/90 transition-colors mt-6"
+        className="w-full flex items-center justify-center gap-2 bg-zen-slate text-zen-bg py-3 rounded-xl font-medium hover:opacity-90 transition-colors mt-6"
       >
         <PlusCircle size={20} />
         Add to Plate

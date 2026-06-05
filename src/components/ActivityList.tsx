@@ -46,7 +46,7 @@ export const ActivityList: React.FC = () => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   className={`flex flex-col p-3 rounded-2xl border transition-all duration-300 min-h-[120px] ${
-                    snapshot.isDraggingOver ? 'bg-zen-sand/40 border-zen-sage scale-[1.02]' : 'bg-white/30 border-zen-sand'
+                    snapshot.isDraggingOver ? 'bg-zen-sand/40 border-zen-sage scale-[1.02]' : 'bg-zen-surface/50 border-zen-sand'
                   }`}
                 >
                   <div className={`text-[10px] font-black uppercase tracking-tighter mb-3 flex items-center gap-2 ${MACRO_CONFIG[macro].color}`}>
@@ -63,7 +63,7 @@ export const ActivityList: React.FC = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className={`group bg-white p-3 rounded-xl border border-zen-sand shadow-sm flex items-center gap-3 transition-shadow ${
+                            className={`group bg-zen-surface p-3 rounded-xl border border-zen-sand shadow-sm flex items-center gap-3 transition-shadow ${
                               snapshot.isDragging ? 'shadow-xl ring-2 ring-zen-sage/30' : 'hover:shadow-md'
                             }`}
                           >

@@ -47,7 +47,7 @@ export const WeeklySummary: React.FC = () => {
   if (logs.length < 5) return null; // Only show after some data exists
 
   return (
-    <div className="bg-white p-6 rounded-3xl border border-zen-sand shadow-sm space-y-6">
+    <div className="bg-zen-surface p-6 rounded-3xl border border-zen-sand shadow-sm space-y-6 transition-colors">
       <h3 className="text-sm font-medium text-zen-slate/50 uppercase tracking-widest text-center">Weekly Reflection</h3>
       
       <div className="flex justify-around items-center">

@@ -25,7 +25,7 @@ export const ActivityHeatmap: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-3xl border border-zen-sand shadow-sm space-y-4">
+    <div className="bg-zen-surface p-6 rounded-3xl border border-zen-sand shadow-sm space-y-4 max-w-sm mx-auto transition-colors">
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-medium text-zen-slate/50 uppercase tracking-widest">Cognitive Garden</h3>
         <div className="flex gap-1">

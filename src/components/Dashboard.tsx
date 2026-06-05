@@ -66,7 +66,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Score Section */}
-      <div className="bg-white p-8 rounded-3xl shadow-sm border border-zen-sand text-center relative overflow-hidden">
+      <div className="bg-zen-surface p-8 rounded-3xl shadow-sm border border-zen-sand text-center relative overflow-hidden transition-colors">
         <div className="absolute top-0 right-0 p-4 opacity-5">
            <Leaf size={120} />
         </div>
@@ -80,7 +80,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Chart & Goals Section */}
-      <div className="bg-white p-6 rounded-3xl shadow-sm border border-zen-sand flex flex-col items-center relative">
+      <div className="bg-zen-surface p-6 rounded-3xl shadow-sm border border-zen-sand flex flex-col items-center relative transition-colors">
         <div className="w-full flex justify-between items-center mb-4">
           <h3 className="text-sm font-medium text-zen-slate/50 uppercase tracking-widest">Macro Balance</h3>
           <button 
@@ -117,16 +117,16 @@ export const Dashboard: React.FC = () => {
           <div className="w-full aspect-square max-h-[400px] min-h-[300px]">
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <RadarChart cx="50%" cy="50%" outerRadius="70%" data={chartData}>
-                <PolarGrid stroke="#F2E9E1" />
+                <PolarGrid stroke="var(--accent-sand)" />
                 <PolarAngleAxis
                   dataKey="subject"
-                  tick={{ fill: '#4A5568', fontSize: 10, fontWeight: 500 }}
+                  tick={{ fill: 'var(--text-primary)', fontSize: 10, fontWeight: 500 }}
                 />
                 <Radar
                   name="Minutes"
                   dataKey="value"
-                  stroke="#9EB3A0"
-                  fill="#9EB3A0"
+                  stroke="var(--accent-sage)"
+                  fill="var(--accent-sage)"
                   fillOpacity={0.4}
                 />
               </RadarChart>

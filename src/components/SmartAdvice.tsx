@@ -50,7 +50,7 @@ export const SmartAdvice: React.FC = () => {
       </div>
 
       {/* Smart Tip */}
-      <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm space-y-3">
+      <div className="bg-zen-surface p-6 rounded-2xl border border-zen-sand shadow-sm space-y-3 transition-colors">
         <div className="flex items-center gap-2 text-zen-sage font-medium">
           <Lightbulb size={18} />
           <span>Smart Advice</span>

@@ -13,7 +13,7 @@ export const Badges: React.FC = () => {
         {unlockedBadges.map((badge) => (
           <div
             key={badge.id}
-            className="group relative flex flex-col items-center p-4 bg-white rounded-2xl border border-zen-sand shadow-sm transition-all hover:border-zen-sage"
+            className="group relative flex flex-col items-center p-4 bg-zen-surface rounded-2xl border border-zen-sand shadow-sm transition-all hover:border-zen-sage"
           >
             <div className="text-3xl mb-2 grayscale group-hover:grayscale-0 transition-all scale-100 group-hover:scale-110">
               {badge.icon}
@@ -23,7 +23,7 @@ export const Badges: React.FC = () => {
             </div>
             
             {/* Tooltip */}
-            <div className="absolute bottom-full mb-2 hidden group-hover:block w-32 p-2 bg-zen-slate text-white text-[10px] rounded-lg text-center z-10 shadow-xl">
+            <div className="absolute bottom-full mb-2 hidden group-hover:block w-32 p-2 bg-zen-slate text-zen-bg text-[10px] rounded-lg text-center z-10 shadow-xl">
               {badge.description}
               <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-zen-slate" />
             </div>

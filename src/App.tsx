@@ -92,12 +92,12 @@ function App() {
   return (
     <div className="min-h-screen bg-zen-bg selection:bg-zen-sage/20 transition-colors duration-500">
       {/* Header */}
-      <header className="max-w-7xl mx-auto px-6 py-8 flex flex-col items-center text-center relative">
+      <header className="max-w-[1400px] mx-auto px-6 py-8 flex flex-col items-center text-center relative">
         <div className="absolute top-8 right-6">
           {user ? (
             <button 
               onClick={() => setView(view === 'home' ? 'profile' : 'home')}
-              className="flex items-center gap-2 p-1 pr-4 rounded-full bg-white border border-zen-sand shadow-sm hover:border-zen-sage transition-all"
+              className="flex items-center gap-2 p-1 pr-4 rounded-full bg-zen-surface border border-zen-sand shadow-sm hover:border-zen-sage transition-all"
             >
               {user.photoURL ? (
                 <img 
@@ -121,7 +121,7 @@ function App() {
           ) : (
             <button 
               onClick={handleLogin}
-              className="flex items-center gap-2 px-6 py-2 rounded-full bg-zen-slate text-white text-xs font-bold uppercase tracking-widest hover:bg-zen-slate/90 transition-all shadow-md"
+              className="flex items-center gap-2 px-6 py-2 rounded-full bg-zen-slate text-zen-bg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all shadow-md"
             >
               <LogIn size={16} />
               Sign In
@@ -129,7 +129,7 @@ function App() {
           )}
         </div>
 
-        <div className="flex items-center gap-2 text-zen-sage mb-4 bg-zen-sage/10 px-4 py-1 rounded-full text-sm font-medium">
+        <div className="flex items-center gap-2 text-zen-sage mb-4 bg-zen-sage/10 px-4 py-1 rounded-full text-sm font-medium border border-zen-sage/20">
           <Sparkles size={16} className={isSyncing ? "animate-pulse" : ""} />
           <span>{isSyncing ? "Syncing Garden..." : "Mindful Consumption"}</span>
         </div>
@@ -141,33 +141,32 @@ function App() {
         </p>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 pb-24">
+      <main className="max-w-[1400px] mx-auto px-6 pb-24">
         {view === 'profile' ? (
           <ProfileView onBack={() => setView('home')} />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 animate-in fade-in duration-700">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-700 items-start">
             
-            {/* Side Column: Tools & Stats */}
-            <div className="lg:col-span-4 space-y-12">
+            {/* Left Column (3): Logging & Rules */}
+            <div className="lg:col-span-3 space-y-8">
               <LogForm />
-              <WeeklySummary />
-              <Badges />
+              <div className="sticky top-8">
+                <NutritionLabel />
+              </div>
             </div>
 
-            {/* Main Column: Dashboard & Interactive List */}
-            <div className="lg:col-span-8 space-y-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <SmartAdvice />
-                <Dashboard />
-              </div>
-              <ActivityHeatmap />
+            {/* Center Column (6): Dashboard & DND Plate */}
+            <div className="lg:col-span-6 space-y-8">
+              <SmartAdvice />
+              <Dashboard />
               <ActivityList />
             </div>
 
-            {/* Float Column: Nutrition Facts (Hidden on small screens, fixed on large if needed, but here simple grid) */}
-            <div className="lg:col-span-12 flex flex-col items-center pt-12 border-t border-zen-sand mt-12">
-               <h2 className="text-sm font-medium text-zen-slate/50 uppercase tracking-widest text-center mb-8">Daily Digest</h2>
-               <NutritionLabel />
+            {/* Right Column (3): Stats & Heatmap */}
+            <div className="lg:col-span-3 space-y-8">
+              <ActivityHeatmap />
+              <WeeklySummary />
+              <Badges />
             </div>
 
           </div>

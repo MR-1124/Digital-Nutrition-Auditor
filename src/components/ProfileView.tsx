@@ -36,7 +36,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
   return (
     <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Profile Header */}
-      <div className="bg-white rounded-3xl p-8 border border-zen-sand shadow-sm mb-8 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+      <div className="bg-zen-surface rounded-3xl p-8 border border-zen-sand shadow-sm mb-8 flex flex-col md:flex-row items-center gap-8 text-center md:text-left transition-colors">
         <div className="relative">
           {user?.photoURL ? (
             <img 
@@ -55,7 +55,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
           )}
         </div>
         <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
             <h2 className="text-3xl font-serif font-medium text-zen-slate">
               {user?.displayName || 'Zen Auditor'}
             </h2>
@@ -85,7 +85,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {/* Appearance Settings */}
-        <div className="bg-white p-8 rounded-3xl border border-zen-sand shadow-sm">
+        <div className="bg-zen-surface p-8 rounded-3xl border border-zen-sand shadow-sm transition-colors">
           <h3 className="text-lg font-medium text-zen-slate mb-6">Atmosphere</h3>
           <div className="space-y-4">
             {[
@@ -106,7 +106,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
                 </div>
                 <div className="flex -space-x-2">
                   {t.colors.map((c, i) => (
-                    <div key={i} className={`w-6 h-6 rounded-full border-2 border-white shadow-sm ${c}`} />
+                    <div key={i} className={`w-6 h-6 rounded-full border-2 border-zen-surface shadow-sm ${c}`} />
                   ))}
                 </div>
               </button>
@@ -116,7 +116,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
 
         {/* Lifetime Stats Card (Moved inside grid) */}
         <div className="space-y-4">
-          <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4">
+          <div className="bg-zen-surface p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4 transition-colors">
             <div className="p-3 bg-zen-sage/10 rounded-xl text-zen-sage">
               <Clock size={24} />
             </div>
@@ -125,7 +125,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
               <div className="text-[10px] font-medium text-zen-slate/40 uppercase tracking-widest">Lifetime Focus</div>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4">
+          <div className="bg-zen-surface p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4 transition-colors">
             <div className="p-3 bg-zen-rose/10 rounded-xl text-zen-rose">
               <Calendar size={24} />
             </div>
@@ -134,7 +134,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
               <div className="text-[10px] font-medium text-zen-slate/40 uppercase tracking-widest">Current Streak</div>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4">
+          <div className="bg-zen-surface p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4 transition-colors">
             <div className="p-3 bg-zen-sage/10 rounded-xl text-zen-sage">
               <Award size={24} />
             </div>
@@ -147,7 +147,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
       </div>
 
       {/* Badges List */}
-      <div className="bg-white p-8 rounded-3xl border border-zen-sand shadow-sm mb-8">
+      <div className="bg-zen-surface p-8 rounded-3xl border border-zen-sand shadow-sm mb-8 transition-colors">
         <h3 className="text-lg font-medium text-zen-slate mb-6 flex items-center gap-2">
           <Award size={20} className="text-zen-sage" />
           Achievement Gallery

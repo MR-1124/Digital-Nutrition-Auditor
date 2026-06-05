@@ -2,6 +2,7 @@
 
 @theme {
   --color-zen-bg: var(--bg-primary);
+  --color-zen-surface: var(--bg-surface);
   --color-zen-sage: var(--accent-sage);
   --color-zen-sand: var(--accent-sand);
   --color-zen-slate: var(--text-primary);
@@ -17,8 +18,9 @@
 /* Default Zen Theme */
 :root {
   --bg-primary: #FDFCFB;
+  --bg-surface: #FFFFFF;
   --accent-sage: #9EB3A0;
-  --accent-sand: #F2E9E1;
+  --accent-sand: #E2D9D1;
   --text-primary: #4A5568;
   --accent-rose: #E5B39B;
   --accent-clay: #D17A7A;
@@ -27,21 +29,23 @@
 /* Midnight Theme */
 [data-theme='midnight'] {
   --bg-primary: #0F172A;
-  --accent-sage: #38BDF8; /* Electric Blue */
-  --accent-sand: #1E293B;
+  --bg-surface: #1E293B;
+  --accent-sage: #38BDF8; 
+  --accent-sand: #334155;
   --text-primary: #F1F5F9;
-  --accent-rose: #A855F7; /* Purple */
-  --accent-clay: #F43F5E; /* Pink/Red */
+  --accent-rose: #A855F7; 
+  --accent-clay: #F43F5E; 
 }
 
 /* Forest Theme */
 [data-theme='forest'] {
   --bg-primary: #1A2F1C;
-  --accent-sage: #86EFAC; /* Bright Green */
-  --accent-sand: #2D4A2F;
+  --bg-surface: #243E26;
+  --accent-sage: #86EFAC; 
+  --accent-sand: #3D5A40;
   --text-primary: #ECFDF5;
-  --accent-rose: #FDE047; /* Yellow */
-  --accent-clay: #FB923C; /* Orange */
+  --accent-rose: #FDE047; 
+  --accent-clay: #FB923C; 
 }
 
 :root {
