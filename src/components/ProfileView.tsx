@@ -53,9 +53,15 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
           )}
         </div>
         <div className="flex-1">
-          <h2 className="text-3xl font-serif font-medium text-zen-slate mb-1">
-            {user?.displayName || 'Zen Auditor'}
-          </h2>
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-3xl font-serif font-medium text-zen-slate">
+              {user?.displayName || 'Zen Auditor'}
+            </h2>
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-zen-sage/10 text-zen-sage text-[10px] font-bold uppercase tracking-widest border border-zen-sage/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-zen-sage animate-pulse" />
+              Secure Session
+            </div>
+          </div>
           <p className="text-zen-slate/50 mb-4">{user?.email || 'Local User'}</p>
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
              <button

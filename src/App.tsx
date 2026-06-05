@@ -20,6 +20,31 @@ function App() {
   const isSyncing = useNutritionStore((state) => state.isSyncing);
   const subscribeToCloud = useNutritionStore((state) => state.subscribeToCloud);
 
+  // Inactivity Timer (60 minutes)
+  useEffect(() => {
+    if (!user) return;
+
+    let timeoutId: number;
+
+    const resetTimer = () => {
+      window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(async () => {
+        await auth.signOut();
+        alert("Session expired due to inactivity.");
+        setView('home');
+      }, 60 * 60 * 1000); // 60 minutes
+    };
+
+    const events = ['mousedown', 'keydown', 'scroll', 'touchstart'];
+    events.forEach(event => window.addEventListener(events[0], resetTimer));
+    resetTimer();
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      events.forEach(event => window.removeEventListener(events[0], resetTimer));
+    };
+  }, [user]);
+
   useEffect(() => {
     let cloudUnsubscribe: (() => void) | undefined;
 
