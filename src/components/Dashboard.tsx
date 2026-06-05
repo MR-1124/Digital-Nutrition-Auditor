@@ -114,8 +114,8 @@ export const Dashboard: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="w-full aspect-square max-h-[400px] min-h-[300px]">
-            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+          <div className="w-full h-[350px]">
+            <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="70%" data={chartData}>
                 <PolarGrid stroke="var(--accent-sand)" />
                 <PolarAngleAxis
