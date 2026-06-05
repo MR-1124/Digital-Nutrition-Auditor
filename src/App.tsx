@@ -16,9 +16,15 @@ import { useNutritionStore } from './store';
 function App() {
   const [view, setView] = useState<'home' | 'profile'>('home');
   const user = useNutritionStore((state) => state.user);
+  const theme = useNutritionStore((state) => state.theme);
   const setUser = useNutritionStore((state) => state.setUser);
   const isSyncing = useNutritionStore((state) => state.isSyncing);
   const subscribeToCloud = useNutritionStore((state) => state.subscribeToCloud);
+
+  // Apply Theme
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   // Inactivity Timer (60 minutes)
   useEffect(() => {
@@ -84,7 +90,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zen-bg selection:bg-zen-sage/20">
+    <div className="min-h-screen bg-zen-bg selection:bg-zen-sage/20 transition-colors duration-500">
       {/* Header */}
       <header className="max-w-7xl mx-auto px-6 py-8 flex flex-col items-center text-center relative">
         <div className="absolute top-8 right-6">
@@ -141,29 +147,27 @@ function App() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 animate-in fade-in duration-700">
             
-            {/* Left Column: Logging & List */}
+            {/* Side Column: Tools & Stats */}
             <div className="lg:col-span-4 space-y-12">
               <LogForm />
+              <WeeklySummary />
+              <Badges />
+            </div>
+
+            {/* Main Column: Dashboard & Interactive List */}
+            <div className="lg:col-span-8 space-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <SmartAdvice />
+                <Dashboard />
+              </div>
+              <ActivityHeatmap />
               <ActivityList />
             </div>
 
-            {/* Center Column: Dashboard & Heatmap */}
-            <div className="lg:col-span-4 space-y-12">
-              <SmartAdvice />
-              <Dashboard />
-              <ActivityHeatmap />
-            </div>
-
-            {/* Right Column: Nutrition Facts & Summary */}
-            <div className="lg:col-span-4 space-y-12">
-              <div className="sticky top-12 space-y-12 w-full">
-                <div className="space-y-4">
-                  <h2 className="text-sm font-medium text-zen-slate/50 uppercase tracking-widest text-center">Summary Label</h2>
-                  <NutritionLabel />
-                </div>
-                <WeeklySummary />
-                <Badges />
-              </div>
+            {/* Float Column: Nutrition Facts (Hidden on small screens, fixed on large if needed, but here simple grid) */}
+            <div className="lg:col-span-12 flex flex-col items-center pt-12 border-t border-zen-sand mt-12">
+               <h2 className="text-sm font-medium text-zen-slate/50 uppercase tracking-widest text-center mb-8">Daily Digest</h2>
+               <NutritionLabel />
             </div>
 
           </div>

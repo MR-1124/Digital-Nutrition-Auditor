@@ -5,6 +5,7 @@ import { doc, setDoc, onSnapshot, updateDoc, deleteDoc } from 'firebase/firestor
 
 export type MacroType = 'Educational' | 'Entertainment' | 'High-Stress' | 'Brain-Rot';
 export type MoodType = 'Calm' | 'Focused' | 'Anxious' | 'Drained' | 'Happy';
+export type ThemeType = 'zen' | 'midnight' | 'forest';
 
 export interface ActivityLog {
   id: string;
@@ -37,10 +38,13 @@ interface NutritionState {
   goals: Record<MacroType, number>;
   unlockedBadges: Badge[];
   user: UserProfile | null;
+  theme: ThemeType;
   isSyncing: boolean;
   addLog: (log: Omit<ActivityLog, 'id' | 'timestamp'>) => Promise<void>;
   removeLog: (id: string) => Promise<void>;
+  updateLogMacro: (id: string, newMacro: MacroType) => Promise<void>;
   setGoal: (macro: MacroType, minutes: number) => Promise<void>;
+  setTheme: (theme: ThemeType) => Promise<void>;
   checkMilestones: () => Promise<void>;
   setUser: (user: UserProfile | null) => void;
   subscribeToCloud: (user: UserProfile) => () => void;
@@ -64,6 +68,7 @@ export const useNutritionStore = create<NutritionState>()(
       goals: INITIAL_GOALS,
       unlockedBadges: [],
       user: null,
+      theme: 'zen',
       isSyncing: false,
 
       addLog: async (log) => {
@@ -109,7 +114,8 @@ export const useNutritionStore = create<NutritionState>()(
               streak: newStreak,
               lastLogDate: today,
               goals: state.goals,
-              unlockedBadges: state.unlockedBadges
+              unlockedBadges: state.unlockedBadges,
+              theme: state.theme
             }, { merge: true });
           } catch (e) {
             console.error("Cloud sync failed", e);
@@ -122,6 +128,23 @@ export const useNutritionStore = create<NutritionState>()(
       removeLog: async (id) => {
         const state = get();
         const updatedLogs = state.logs.filter((l) => l.id !== id);
+        set({ logs: updatedLogs });
+
+        if (state.user) {
+          try {
+            const userRef = doc(db, "users", state.user.uid);
+            await updateDoc(userRef, { logs: updatedLogs });
+          } catch (e) {
+            console.error("Cloud sync failed", e);
+          }
+        }
+      },
+
+      updateLogMacro: async (id, newMacro) => {
+        const state = get();
+        const updatedLogs = state.logs.map(l => 
+          l.id === id ? { ...l, macro: newMacro } : l
+        );
         set({ logs: updatedLogs });
 
         if (state.user) {
@@ -149,6 +172,19 @@ export const useNutritionStore = create<NutritionState>()(
         }
       },
 
+      setTheme: async (theme) => {
+        set({ theme });
+        const state = get();
+        if (state.user) {
+          try {
+            const userRef = doc(db, "users", state.user.uid);
+            await updateDoc(userRef, { theme });
+          } catch (e) {
+            console.error("Cloud sync failed", e);
+          }
+        }
+      },
+
       setUser: (user) => {
         const currentUser = get().user;
         if (currentUser && (!user || currentUser.uid !== user.uid)) {
@@ -164,6 +200,7 @@ export const useNutritionStore = create<NutritionState>()(
           lastLogDate: null,
           goals: INITIAL_GOALS,
           unlockedBadges: [],
+          theme: 'zen',
         });
       },
 
@@ -193,17 +230,18 @@ export const useNutritionStore = create<NutritionState>()(
               lastLogDate: data.lastLogDate || null,
               goals: data.goals || get().goals,
               unlockedBadges: data.unlockedBadges || [],
+              theme: data.theme || get().theme,
               isSyncing: false
             });
           } else {
-            // First time login: initialize cloud with local data
             const state = get();
             setDoc(userRef, {
               logs: state.logs,
               streak: state.streak,
               lastLogDate: state.lastLogDate,
               goals: state.goals,
-              unlockedBadges: state.unlockedBadges
+              unlockedBadges: state.unlockedBadges,
+              theme: state.theme
             }).then(() => set({ isSyncing: false }));
           }
         }, (error) => {
@@ -250,12 +288,12 @@ export const useNutritionStore = create<NutritionState>()(
     {
       name: 'nutrition-storage',
       partialize: (state) => ({ 
-        // Only persist these fields locally to prevent user overlap
         logs: state.user ? [] : state.logs, 
         streak: state.user ? 0 : state.streak,
         goals: state.goals,
         unlockedBadges: state.user ? [] : state.unlockedBadges,
         user: state.user,
+        theme: state.theme,
         lastLogDate: state.lastLogDate
       }),
     }

@@ -14,6 +14,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
   const badges = useNutritionStore((state) => state.unlockedBadges);
   const setUser = useNutritionStore((state) => state.setUser);
   const purgeUserData = useNutritionStore((state) => state.purgeUserData);
+  const theme = useNutritionStore((state) => state.theme);
+  const setTheme = useNutritionStore((state) => state.setTheme);
 
   const totalMinutes = logs.reduce((acc, curr) => acc + curr.durationMinutes, 0);
 
@@ -81,22 +83,66 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onBack }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        {/* Lifetime Stats */}
-        <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex flex-col items-center text-center">
-          <Clock className="text-zen-sage mb-2" size={32} />
-          <div className="text-2xl font-bold text-zen-slate">{totalMinutes}m</div>
-          <div className="text-xs font-medium text-zen-slate/40 uppercase tracking-widest">Lifetime Focus</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        {/* Appearance Settings */}
+        <div className="bg-white p-8 rounded-3xl border border-zen-sand shadow-sm">
+          <h3 className="text-lg font-medium text-zen-slate mb-6">Atmosphere</h3>
+          <div className="space-y-4">
+            {[
+              { id: 'zen', name: 'Zen Morning', desc: 'Soft whites and calming sage.', colors: ['bg-[#FDFCFB]', 'bg-[#9EB3A0]'] },
+              { id: 'midnight', name: 'Midnight Deep', desc: 'Dark navy for focused nights.', colors: ['bg-[#0F172A]', 'bg-[#38BDF8]'] },
+              { id: 'forest', name: 'Eternal Forest', desc: 'Earthy greens and wood tones.', colors: ['bg-[#1A2F1C]', 'bg-[#86EFAC]'] },
+            ].map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setTheme(t.id as any)}
+                className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all ${
+                  theme === t.id ? 'border-zen-sage bg-zen-sage/5 ring-2 ring-zen-sage/20' : 'border-zen-sand hover:border-zen-sage/50'
+                }`}
+              >
+                <div className="text-left">
+                  <div className="font-bold text-sm text-zen-slate">{t.name}</div>
+                  <div className="text-xs text-zen-slate/40">{t.desc}</div>
+                </div>
+                <div className="flex -space-x-2">
+                  {t.colors.map((c, i) => (
+                    <div key={i} className={`w-6 h-6 rounded-full border-2 border-white shadow-sm ${c}`} />
+                  ))}
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex flex-col items-center text-center">
-          <Calendar className="text-zen-rose mb-2" size={32} />
-          <div className="text-2xl font-bold text-zen-slate">{streak} Days</div>
-          <div className="text-xs font-medium text-zen-slate/40 uppercase tracking-widest">Current Streak</div>
-        </div>
-        <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex flex-col items-center text-center">
-          <Award className="text-zen-sage mb-2" size={32} />
-          <div className="text-2xl font-bold text-zen-slate">{badges.length}</div>
-          <div className="text-xs font-medium text-zen-slate/40 uppercase tracking-widest">Milestones Met</div>
+
+        {/* Lifetime Stats Card (Moved inside grid) */}
+        <div className="space-y-4">
+          <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4">
+            <div className="p-3 bg-zen-sage/10 rounded-xl text-zen-sage">
+              <Clock size={24} />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-zen-slate">{totalMinutes}m</div>
+              <div className="text-[10px] font-medium text-zen-slate/40 uppercase tracking-widest">Lifetime Focus</div>
+            </div>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4">
+            <div className="p-3 bg-zen-rose/10 rounded-xl text-zen-rose">
+              <Calendar size={24} />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-zen-slate">{streak} Days</div>
+              <div className="text-[10px] font-medium text-zen-slate/40 uppercase tracking-widest">Current Streak</div>
+            </div>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-zen-sand shadow-sm flex items-center gap-4">
+            <div className="p-3 bg-zen-sage/10 rounded-xl text-zen-sage">
+              <Award size={24} />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-zen-slate">{badges.length}</div>
+              <div className="text-[10px] font-medium text-zen-slate/40 uppercase tracking-widest">Milestones Met</div>
+            </div>
+          </div>
         </div>
       </div>
 

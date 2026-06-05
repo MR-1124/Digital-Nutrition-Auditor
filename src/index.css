@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-zen-bg: #FDFCFB;
-  --color-zen-sage: #9EB3A0;
-  --color-zen-sand: #F2E9E1;
-  --color-zen-slate: #4A5568;
-  --color-zen-rose: #E5B39B;
-  --color-zen-clay: #D17A7A;
+  --color-zen-bg: var(--bg-primary);
+  --color-zen-sage: var(--accent-sage);
+  --color-zen-sand: var(--accent-sand);
+  --color-zen-slate: var(--text-primary);
+  --color-zen-rose: var(--accent-rose);
+  --color-zen-clay: var(--accent-clay);
   
   --color-macro-educational: var(--color-zen-sage);
   --color-macro-entertainment: var(--color-zen-rose);
@@ -14,13 +14,59 @@
   --color-macro-brainrot: var(--color-zen-slate);
 }
 
+/* Default Zen Theme */
 :root {
-  background-color: var(--color-zen-bg);
-  color: var(--color-zen-slate);
+  --bg-primary: #FDFCFB;
+  --accent-sage: #9EB3A0;
+  --accent-sand: #F2E9E1;
+  --text-primary: #4A5568;
+  --accent-rose: #E5B39B;
+  --accent-clay: #D17A7A;
+}
+
+/* Midnight Theme */
+[data-theme='midnight'] {
+  --bg-primary: #0F172A;
+  --accent-sage: #38BDF8; /* Electric Blue */
+  --accent-sand: #1E293B;
+  --text-primary: #F1F5F9;
+  --accent-rose: #A855F7; /* Purple */
+  --accent-clay: #F43F5E; /* Pink/Red */
+}
+
+/* Forest Theme */
+[data-theme='forest'] {
+  --bg-primary: #1A2F1C;
+  --accent-sage: #86EFAC; /* Bright Green */
+  --accent-sand: #2D4A2F;
+  --text-primary: #ECFDF5;
+  --accent-rose: #FDE047; /* Yellow */
+  --accent-clay: #FB923C; /* Orange */
+}
+
+:root {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-sand);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-sage);
 }
