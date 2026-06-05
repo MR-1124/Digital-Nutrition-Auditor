@@ -36,12 +36,12 @@ function App() {
     };
 
     const events = ['mousedown', 'keydown', 'scroll', 'touchstart'];
-    events.forEach(event => window.addEventListener(events[0], resetTimer));
+    events.forEach(e => window.addEventListener(e, resetTimer));
     resetTimer();
 
     return () => {
       window.clearTimeout(timeoutId);
-      events.forEach(event => window.removeEventListener(events[0], resetTimer));
+      events.forEach(e => window.removeEventListener(e, resetTimer));
     };
   }, [user]);
 
