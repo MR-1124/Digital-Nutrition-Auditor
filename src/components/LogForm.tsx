@@ -27,9 +27,9 @@ export const LogForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name) return;
+    if (!name.trim()) return;
     addLog({
-      name,
+      name: name.trim().substring(0, 50), // Character limit and sanitization
       durationMinutes: parseInt(duration, 10),
       macro,
       mood,
@@ -48,6 +48,7 @@ export const LogForm: React.FC = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Reading documentation, Twitter, Netflix"
+          maxLength={50}
           className="w-full px-4 py-2 rounded-xl border border-zen-sand focus:outline-none focus:ring-2 focus:ring-zen-sage/30 bg-zen-bg/30"
         />
       </div>
